@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>邀请奖励生成器</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      background-color: #f0f2f5;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .buttons {
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      white-space: pre-line;
+      margin-top: 30px;
+      font-size: 18px;
+      color: #222;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>邀请奖励生成器</h1>
+  <div class="buttons">
+    <button onclick="generate('S2')">生成 S2 奖励</button>
+    <button onclick="generate('S3')">生成 S3 奖励</button>
+    <button onclick="generate('S4')">生成 S4 奖励</button>
+    <button onclick="generate('S5')">生成 S5 奖励</button>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    const data = {
+      S2: {
+        original: 870,
+        extra: 4350,
+        spin: 2,
+        bonus: 10000,
+        downline: 11880
+      },
+      S3: {
+        original: 2970,
+        extra: 14850,
+        spin: 6,
+        child: '一个S3的子账号',
+        pension: 13000,
+        bonus: 50000,
+        downline: 11880
+      },
+      S4: {
+        original: 9370,
+        extra: 46850,
+        spin: 8,
+        child: '一个S4的子账号',
+        pension: 24000,
+        bonus: 150000,
+        downline: 37480
+      },
+      S5: {
+        original: 23000,
+        extra: 115000,
+        spin: 10,
+        child: '一个S5的子账号',
+        pension: 26000,
+        bonus: 500000,
+        downline: 92000
+      }
+    };
+
+    function randomAccount() {
+      // 始终以1开头，后接9位随机数字
+      return '1' + Math.floor(100000000 + Math.random() * 900000000);
+    }
+
+    function generate(level) {
+      const invitee = randomAccount();
+      const inviter = randomAccount();
+      const info = data[level];
+      let text = `🎉🎉🎉恭喜${inviter}邀请${invitee}成为${level}。\n`;
+      text += `1：获得${info.original}（原始奖励）+${info.extra}(额外奖励）+${info.spin}次幸运转盘\n`;
+      if (level !== 'S2') {	
+        text += `2：免费获得${info.child}\n`;
+        text += `3：获得医疗保险养老金${info.pension}奖励\n`;
+        text += `4：获得${info.bonus}分红奖励\n`;
+        text += `5：下属${invitee}获得${info.downline}新人奖励+${info.spin}次幸运转盘\n`;
+      } else {
+        text += `2：获得${info.bonus}分红奖励\n`;
+        text += `5：下属${invitee}获得${info.downline}新人奖励+${info.spin}次幸运转盘\n`;
+      }
+      text += `额外奖励将在第二天晚上发放`;
+      document.getElementById('result').innerText = text;
+    }
+  </script>
+</body>
+</html>
