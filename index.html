@@ -64,6 +64,7 @@
         extra: 163,
         spin: 0,
 	child: '一个S1的子账号',
+	pension: 600,
         bonus: 1000,
         downline: 163
       },
@@ -72,6 +73,7 @@
         extra: 4350,
         spin: 2,
 	child: '一个S2的子账号',
+	pension: 4200,	
         bonus: 10000,
         downline: 11880
       },
@@ -115,15 +117,10 @@
       const info = data[level];
       let text = `🎉🎉🎉恭喜${inviter}邀请${invitee}成为${level}。\n`;
       text += `1：获得${info.original}（原始奖励）+${info.extra}(额外奖励）+${info.spin}次幸运转盘\n`;
-      if (level !== 'S2'&&'S1') {	
-        text += `2：免费获得${info.child}\n`;
-        text += `3：获得医疗保险养老金${info.pension}奖励\n`;
-        text += `4：获得${info.bonus}分红奖励\n`;
-        text += `5：下属${invitee}获得${info.downline}新人奖励+${info.spin}次幸运转盘\n`;
-      } else {
-        text += `2：获得${info.bonus}分红奖励\n`;
-        text += `5：下属${invitee}获得${info.downline}新人奖励+${info.spin}次幸运转盘\n`;
-      }
+      text += `2：免费获得${info.child}\n`;
+      text += `3：获得医疗保险养老金${info.pension}奖励\n`;
+      text += `4：获得${info.bonus}分红奖励\n`;
+      text += `5：下属${invitee}获得${info.downline}新人奖励+${info.spin}次幸运转盘\n`;
       text += `额外奖励将在第二天晚上发放`;
       document.getElementById('result').innerText = text;
     }
